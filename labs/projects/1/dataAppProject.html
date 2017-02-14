@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='//fonts.googleapis.com/css?family=Source Code Pro' rel='stylesheet'>
+        <title> City of Chicago Crime - Daniyal Latif And Aydin Truong</title>
+        <h1>
+            City of Chicago Crime - Daniyal Latif And Aydin Truong
+        </h1>
+        <h2>
+            Interested in the crime in your district? <h3> Enter the district and the type of crime to find out!</h3>
+        </h2>
+        <style>
+            .form
+            {
+                font-family: 'Source Code Pro'; 
+            }
+            #district_type
+            {
+                font-family: 'Source Code Pro';
+            }
+            #divv
+            {
+                font-family: 'Source Code Pro';
+            }
+            h1{
+                font-family: 'Source Code Pro';
+            }
+           div      {
+                background-color: #FF5F6D;
+                border-style: thin dotted;
+                border-radius: 25px;
+                padding: 15px;
+
+       }
+     
+            h2 {
+                font-size:1em;
+                font-family: 'Source Code Pro';
+                
+            }
+            h3 {
+                font-size:1em;
+                font-family: 'Source Code Pro';
+            }    
+            body {
+                background-color: #FFC371;
+            }
+            p, h1 {font-family: 'Source Code Pro';}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px; color: black;}
+            pre {font-size: 2em;}
+            input[type=search] {
+                width: 150px;
+                box-sizing: border-box;
+                border: 2px solid #ccc;
+                border-radius: 10px;
+                border-color: yellow;
+                font-size: 16px;
+                background-color: lightblue;
+                background-image: url('http://www.hoachatangiang.com/images/ico/search-icon.jpg');
+                background-position: 10px 10px; 
+                background-repeat: no-repeat;
+                padding: 12px 20px 12px 40px;
+                -webkit-transition: width 0.4s ease-in-out;
+                transition: width 0.4s ease-in-out;
+}
+            input[type=search]:focus {
+                width: 100%;
+            
+}
+        </style>
+    </head>
+    <body>
+         <div class="form">
+        <label for="crime_type">Type of Crime</label>
+        <select id="crime_type">
+          <option value="BURGLARY">Burglary</option>
+          <option value="THEFT">Theft</option>
+          <option value="BATTERY">Battery</option>
+          <option value="HOMICIDE">Homicide</option>
+          <option value="CRIMINAL_TRESSPASS">Criminal Tresspass</option>
+          <option value="NARCOTICS">Narcotics</option>
+          <option value="ARSON">Arson</option>
+          <option value="PUBLIC_INTERFERENCE_WITH_OFFICER">Public Interference With Officer</option>
+          <option value="DECEPTIVE_PRACTICE">Deceptive Practice</option>
+          <option value="ASSAULT">Assault</option>
+          <option value="PROSTITUTION">Prostitution</option>
+          <option value="OFFENSE_INVOLVING_CHILDREN">Offense Involving Children</option>
+          <option value="MOTOR_VEHICLE_THEFT">Motor Vehicle Theft</option>
+          <option value="SEX_OFFENSE">Sex Offense</option>
+          <option value="CRIMINAL_DAMAGE">Criminal Damage</option>
+          <option value="WEAPONS_VIOLATION">Weapons Violation</option>
+          <option value="PUBLIC_PEACE_VIOLATION">Public Peace Violation</option>
+          <option value="OTHER_OFFENSE">Other Offense</option>
+          <option value="ROBBERY">Robbery</option>
+          <option value="CRIM_SEXUAL_ASSAULT">CRIM Sexual Assault</option>
+          
+          
+          
+        </select><br>
+        <label for="district_type">District</label>
+        <select id="district_type">
+          <option value="001">1</option>
+          <option value="002">2</option>
+          <option value="003">3</option>
+          <option value="004">4</option>
+          <option value="005">5</option>
+          <option value="006">6</option>
+          <option value="007">7</option>
+          <option value="008">8</option>
+          <option value="009">9</option>
+          <option value="010">10</option>
+          <option value="011">11</option>
+          <option value="012">12</option>
+          <option value="013">13</option>
+          <option value="014">14</option>
+          <option value="015">15</option>
+          <option value="016">16</option>
+          <option value="017">17</option>
+          <option value="018">18</option>
+          <option value="019">19</option>
+          <option value="020">20</option>
+          <option value="021">21</option>
+          <option value="022">22</option>
+          <option value="023">23</option>
+          <option value="024">24</option>
+          <option value="025">25</option>
+          
+          
+          
+        </select><br>
+
+    <form id="search-form" name="search" action="/products" method="get">
+    <input src="path/to/image" name="submit" id= "btn" type="button" placeholder="Submit">
+    </form>
+    <div id="divv"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        
+        // full URL
+
+        //011//
+        $('#btn').click(function() {
+            $("#divv").html("")
+            var baseURL = 'https://data.cityofchicago.org/resource/6zsd-86xi.json';
+            if ($("#district_type").val() != "all") {
+                 baseURL += "?district=" + $("#district_type").val();
+            }
+            if ($("#crime_type").val() != "all") {
+                var url = baseURL += "&primary_type=" + $("#crime_type").val() 
+                console.log(url)
+                $.getJSON(url)
+                .done (function (data) {
+                    $("#divv").append("Number of records returned: " + data.length + "<br><hr>");
+                    $.each(data, 
+                        function (index, value) {
+                            var html = "<hr>"
+                               +"<h1>"
+                               + "<p>"
+                               + "Arrest: "
+                               + value.arrest
+                               +"</p>"
+                               +"</h1>"
+                               +"<h2>"
+                               + "<p>"
+                               + "Block: "                               
+                               + value.block
+                               +"</p>"
+                               + "<h2>"
+                               + "<p>"
+                               + "Date: "                                  
+                               + value.date
+                               +"</p>"
+                               + "</h2>"
+                               + "<h3>"
+                               + "<p>"
+                               + "Description of Crime: "                                 
+                               + value.description
+                               +"</p>"
+                               + "</h3>"
+                               + "<h4>"
+                               + "<p>"
+                               +"Primary Type: "                                 
+                               + value.primary_type
+                               + "</p>"
+                               + "</h4>"
+                               + "<h5>"
+                               + "<p>"
+                               +"<a href='https://www.google.com/maps/place/?q='+value.coordinates>Google Map</a> " 
+                               + "</p>"
+                               + "</h5>"
+                               +"</div>";
+                        
+                              $("#divv").append(html);
+                        }
+                    );
+
+                });
+        
+            }; 
+        });            
+     </script>
+    </body>
+</html>
