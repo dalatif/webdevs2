@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Chicago Teams', 'Championship Titles'],
+          ['Cubs', 3], ['White Sox', 3], ['Bears', 1],
+          ['Bulls', 6], ['Blackhawks', 6]
+        ]);
+
+        var options = {
+          is3d: true,  
+          title: 'Chicago Championship Titles by Team',
+          legend: 'none',
+          pieSliceText: 'label',
+          slices: {  3: {offset: 0.2},
+                    4: {offset: 0.3},
+                    5: {offset: 0.4},
+          },
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 900px; height: 400px;"></div>
+  </body>
+</html>
