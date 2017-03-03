@@ -1,0 +1,205 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Bus Tracker</title>
+ <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ <link href='//fonts.googleapis.com/css?family=Poiret One' rel='stylesheet'>
+
+</head>
+
+<style>
+  submit
+  {
+  width:100px;  
+  }
+  #divv
+  {
+    background: #73AD21;
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 250px; 
+    float:right;
+  }
+  #divvv
+  {
+    background: #73AD21;
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 250px;
+    float:left;
+  }
+
+  
+  nav{
+    background: #ff6699;
+    border-radius: 25px;
+    border: 2px solid #ff6699;
+    padding: 20px; 
+    width: 50;
+    height: 30;
+  }
+
+  h1 {
+    font-family: 'Poiret One';font-size: 22px;
+}
+  #bg
+  {
+    background:powderblue;
+    border-radius: 25px;
+    border: 2px solid powderblue;
+    padding: 20px; 
+    width: 1157px;
+    height: 550px; 
+  }
+  #bustracker{
+  float:right;
+  }
+ 
+</style>
+
+<body>
+    <div id="bg">
+    <h1 id="bustracker">lane tech bus tracker</h1>
+    <nav id="49nav">
+    <input src="path/to/image" name="submit" id= "49south" type="button" placeholder="49-To School" value="49 - S">
+    <input src="path/to/image" name="submit" id= "49north" type="button"  value="49 - N">
+    </nav>
+    <nav id="152nav">
+    <input src="path/to/image" name="submit" id= "152west" type="button"  value="152 - W">
+    <input src="path/to/image" name="submit" id= "152east" type="button"  value="152  - E">
+    </nav>
+    <div id="divvv"></div>
+    <div id="divv"></div>
+   
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+        $('#49south').click(function() {
+          $("#divvv").html("")          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "MW6gVH4ZdEAr6qe6FDxBPPEhg",
+                      "format":"json",
+                      "stpid":"8195",
+                      "top":""
+              }//west add south8195, west add north8417, add west west12569, west add east12527
+              
+            }).done (function (data) {
+              console.log(data);
+              $("#divvv").append("<h1>49S</h1>");
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#divvv").append("Route #" + v.rt + ", " + v.rtdir + ", " + v.prdtm +" " + v.prdctdn + " mins"+ "<br>" );
+                  
+                
+              });
+
+            });
+        });
+        $('#49north').click(function() {
+          $("#divvv").html("")          
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "MW6gVH4ZdEAr6qe6FDxBPPEhg",
+                      "format":"json",
+                      "stpid":"8417",
+                      "top":""
+              }//west add south8195, west add north8417, add west west12569, west add east12527
+              
+            }).done (function (data) {
+              console.log(data);
+              $("#divvv").append("<h1>49N</h1>");
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#divvv").append("Route #" + v.rt + ", " + v.rtdir + ", " + v.prdtm +" " + v.prdctdn + " mins"+ "<br>" );
+                  
+                
+              })
+
+            });
+        });        
+        $('#152east').click(function() {
+          $("#divv").html("")          
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "MW6gVH4ZdEAr6qe6FDxBPPEhg",
+                      "format":"json",
+                      "stpid":"12527",
+                      "top":""
+              }//west add south8195, west add north8417, add west west12569, west add east12527
+              
+            }).done (function (data) {
+              console.log(data);
+              $("#divv").append("<h1>152E</h1>");
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#divv").append("Route #" + v.rt + ", " + v.rtdir + ", " + v.prdtm +" " + v.prdctdn + " mins"+ "<br>" );
+                  
+                
+              })
+
+            });
+        });
+        $('#152west').click(function() {
+          $("#divv").html("")          
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "MW6gVH4ZdEAr6qe6FDxBPPEhg",
+                      "format":"json",
+                      "stpid":"12569",
+                      "top":""
+              }//west add south8195, west add north8417, add west west12569, west add east12527
+              
+            }).done (function (data) {
+              console.log(data);
+              $("#divv").append("<h1>152W</h1>");
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#divv").append("Route #" + v.rt + ", " + v.rtdir + ", " + v.prdtm +" " + v.prdctdn + " mins"+ "<br>" );
+                  
+                
+              })
+
+            });
+        });
+</script>
+ </div>
+</body>
+</html>
