@@ -2,9 +2,16 @@
 <head>
   <meta charset="utf-8">
   <title>Bus Tracker</title>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
  <link href='//fonts.googleapis.com/css?family=Poiret One' rel='stylesheet'>
-
+ <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Weather PWA">
+  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+  <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
 </head>
 
 <style>
@@ -85,8 +92,6 @@
           var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
           
           var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
-          
-          
           $.ajax({
               url: apiPassThruUrl,
               dataType: "json",
