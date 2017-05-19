@@ -48,6 +48,7 @@
         </div>
       </div>
 <style>
+  .mdl-layout__header-row{background-color:green;}
   submit
   {
   width:100px;  
@@ -97,7 +98,6 @@
     border-radius: 25px;
     border: 2px solid powderblue;
     padding: 20px; 
-
   }
   #bustracker{
     display:block;
@@ -105,25 +105,56 @@
     margin: 0 auto;
     width: 60%; 
   }
+  .button
+  {
+    background: #ECECEC;
+		border-radius: 15px;
+		padding: 10px 20px;
+		display: block;
+		font-family: arial;
+		font-weight: bold;
+		color:#7f7f7f;
+		text-decoration: none;
+		text-shadow:0px 1px 0px #fff;
+		border:1px solid #a7a7a7;
+		width: 145px;
+		margin:0px auto;
+		margin-top:100px;
+		box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+		-webkit-transition:box-shadow 0.5s;
+	}
+	.button:hover{
+		box-shadow: 0px 2px 1px white inset, 0px -2px 20px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+	}
+	.button:active{
+		box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
+		background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 100%);
+  }
+
+  
  
 </style>
     <h2>Bus Tracker</h2>
     <div id="bg">
     <h1 id="bustracker">lane tech bus tracker</h1>
     <nav id="49nav">
-    <input src="path/to/image" name="submit" id= "49south" type="button" placeholder="49-To School" value="49 - S">
-    <input src="path/to/image" name="submit" id= "49north" type="button"  value="49 - N">
+    <input src="path/to/image" name="submit" id= "49Bsouth" class="icon-chevron-right" class="button" type="button" placeholder="49B-S" value="49B - S">
+    <input src="path/to/image" name="submit" id= "49north" class="icon-chevron-right" class="button" type="button"  value="49 - N">
     </nav>
     <nav id="152nav">
-    <input src="path/to/image" name="submit" id= "152west" type="button"  value="152 - W">
-    <input src="path/to/image" name="submit" id= "152east" type="button"  value="152  - E">
+    <input src="path/to/image" name="submit" id= "152west" class="icon-chevron-right" class="button" type="button"  value="152 - W">
+    <input src="path/to/image" name="submit" id= "152east" class="icon-chevron-right" class="button" type="button"  value="152  - E">
     </nav>
+    <nav id="155nav">
+    <input src="path/to/image" name="submit" id= "155west" class="icon-chevron-right" class="button" type="button"  value="155 - W">
+    <input src="path/to/image" name="submit" id= "155east" class="icon-chevron-right" class="button" type="button"  value="155  - E">
+    </nav>    
     <div id="divvv"></div>
     <div id="divv"></div>
    
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script>
-        $('#49south').click(function() {
+        $('#49Bsouth').click(function() {
           $("#divvv").html("")
           $("#divv").html("")
           
@@ -137,13 +168,13 @@
               data: {"apiEndpoint": apiEndpoint,
                       "key" : "MW6gVH4ZdEAr6qe6FDxBPPEhg",
                       "format":"json",
-                      "stpid":"8195",
+                      "stpid":"18309",
                       "top":""
               }//west add south8195, west add north8417, add west west12569, west add east12527
               
             }).done (function (data) {
               console.log(data);
-              $("#divvv").append("<h1>49S</h1>");
+              $("#divvv").append("<h1>49S (To School)</h1>");
               $.each(data["bustime-response"]["prd"], function(i,v) {
                   $("#divvv").append("Route #" + v.rt + ", " + v.rtdir + ", " + v.prdtm +" " + v.prdctdn + " mins"+ "<br>" );
                   
@@ -170,11 +201,11 @@
                       "format":"json",
                       "stpid":"8417",
                       "top":""
-              }//west add south8195, west add north8417, add west west12569, west add east12527
+              }
               
             }).done (function (data) {
               console.log(data);
-              $("#divvv").append("<h1>49N</h1>");
+              $("#divvv").append("<h1>49N (To Home)</h1>");
               $.each(data["bustime-response"]["prd"], function(i,v) {
                   $("#divvv").append("Route #" + v.rt + ", " + v.rtdir + ", " + v.prdtm +" " + v.prdctdn + " mins"+ "<br>" );
                   
@@ -242,11 +273,69 @@
               $.each(data["bustime-response"]["prd"], function(i,v) {
                   $("#divv").append("Route #" + v.rt + ", " + v.rtdir + ", " + v.prdtm +" " + v.prdctdn + " mins"+ "<br>" );
                   
-                
-              })
+            
+              });
 
             });
         });
+        $('#155west').click(function() {
+          $("#divv").html("")
+          $("#divvv").html("")
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "MW6gVH4ZdEAr6qe6FDxBPPEhg",
+                      "format":"json",
+                      "stpid":"1767",
+                      "top":""
+              }//west add south8195, west add north8417, add west west12569, west add east12527
+              
+            }).done (function (data) {
+              console.log(data);
+              $("#divv").append("<h1>155W (To School)</h1>");
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#divv").append("Route #" + v.rt + ", " + v.rtdir + ", " + v.prdtm +" " + v.prdctdn + " mins"+ "<br>" );
+                  
+                
+              });
+
+            });
+        });
+        $('#155east').click(function() {
+          $("#divv").html("")
+          $("#divvv").html("")
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "MW6gVH4ZdEAr6qe6FDxBPPEhg",
+                      "format":"json",
+                      "stpid":"1729",
+                      "top":""
+              }//west add south8195, west add north8417, add west west12569, west add east12527
+              
+            }).done (function (data) {
+              console.log(data);
+              $("#divv").append("<h1>155E (To Home)</h1>");
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#divv").append("Route #" + v.rt + ", " + v.rtdir + ", " + v.prdtm +" " + v.prdctdn + " mins"+ "<br>" );
+                  
+                
+              });
+
+            });
+        });        
 </script>
  </div>
 </body>

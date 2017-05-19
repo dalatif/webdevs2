@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       .screen {display: none;}
+      .mdl-layout__header-row{background-color:green;}
     </style>
   </head>
   <body>
@@ -23,10 +24,10 @@
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="./projects/2/schedule.html">Schedule</a>
+            <a class="mdl-navigation__link" href="https://preview.c9users.io/ledeledelee/webdevs2/projects/2/schedule.html">Schedule</a>
             <a class="mdl-navigation__link" href="https://student.cps.k12.il.us/pc/studentlogin.aspx">Grades</a>
             <a class="mdl-navigation__link" href="https://preview.c9users.io/ledeledelee/webdevs2/projects/2/3screen.html">Calendar</a>
-            <a class="mdl-navigation__link" href="./projects/2/index.html">Bus Tracker</a>
+            <a class="mdl-navigation__link" href="https://preview.c9users.io/ledeledelee/webdevs2/projects/2/index.html">Bus Tracker</a>
           </nav>
         </div>
       </header>
@@ -51,6 +52,15 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
+    $('.mdl-navigation__link').click(function(){
+            
+//  the drawer
+            $('.mdl-layout__drawer').toggleClass('is-visible');
+
+// the transparent overlay that shows when you open the drawer
+$('.mdl-layout__obfuscator').toggleClass('is-visible');   
+            
+ });
       $(function() {
         
         $("#screen1").show();
